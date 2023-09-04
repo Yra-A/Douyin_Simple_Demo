@@ -19,10 +19,12 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "FavoriteService"
 	handlerType := (*favorite.FavoriteService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"FavoriteAction": kitex.NewMethodInfo(favoriteActionHandler, newFavoriteServiceFavoriteActionArgs, newFavoriteServiceFavoriteActionResult, false),
-		"FavoriteList":   kitex.NewMethodInfo(favoriteListHandler, newFavoriteServiceFavoriteListArgs, newFavoriteServiceFavoriteListResult, false),
-		"FavoriteCount":  kitex.NewMethodInfo(favoriteCountHandler, newFavoriteServiceFavoriteCountArgs, newFavoriteServiceFavoriteCountResult, false),
-		"IsFavorite":     kitex.NewMethodInfo(isFavoriteHandler, newFavoriteServiceIsFavoriteArgs, newFavoriteServiceIsFavoriteResult, false),
+		"FavoriteAction":           kitex.NewMethodInfo(favoriteActionHandler, newFavoriteServiceFavoriteActionArgs, newFavoriteServiceFavoriteActionResult, false),
+		"FavoriteList":             kitex.NewMethodInfo(favoriteListHandler, newFavoriteServiceFavoriteListArgs, newFavoriteServiceFavoriteListResult, false),
+		"FavoriteCount":            kitex.NewMethodInfo(favoriteCountHandler, newFavoriteServiceFavoriteCountArgs, newFavoriteServiceFavoriteCountResult, false),
+		"FavoriteCountByUserID":    kitex.NewMethodInfo(favoriteCountByUserIDHandler, newFavoriteServiceFavoriteCountByUserIDArgs, newFavoriteServiceFavoriteCountByUserIDResult, false),
+		"TotalFavoritedByAuthorID": kitex.NewMethodInfo(totalFavoritedByAuthorIDHandler, newFavoriteServiceTotalFavoritedByAuthorIDArgs, newFavoriteServiceTotalFavoritedByAuthorIDResult, false),
+		"IsFavorite":               kitex.NewMethodInfo(isFavoriteHandler, newFavoriteServiceIsFavoriteArgs, newFavoriteServiceIsFavoriteResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "favorite",
@@ -92,6 +94,42 @@ func newFavoriteServiceFavoriteCountResult() interface{} {
 	return favorite.NewFavoriteServiceFavoriteCountResult()
 }
 
+func favoriteCountByUserIDHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*favorite.FavoriteServiceFavoriteCountByUserIDArgs)
+	realResult := result.(*favorite.FavoriteServiceFavoriteCountByUserIDResult)
+	success, err := handler.(favorite.FavoriteService).FavoriteCountByUserID(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newFavoriteServiceFavoriteCountByUserIDArgs() interface{} {
+	return favorite.NewFavoriteServiceFavoriteCountByUserIDArgs()
+}
+
+func newFavoriteServiceFavoriteCountByUserIDResult() interface{} {
+	return favorite.NewFavoriteServiceFavoriteCountByUserIDResult()
+}
+
+func totalFavoritedByAuthorIDHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*favorite.FavoriteServiceTotalFavoritedByAuthorIDArgs)
+	realResult := result.(*favorite.FavoriteServiceTotalFavoritedByAuthorIDResult)
+	success, err := handler.(favorite.FavoriteService).TotalFavoritedByAuthorID(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newFavoriteServiceTotalFavoritedByAuthorIDArgs() interface{} {
+	return favorite.NewFavoriteServiceTotalFavoritedByAuthorIDArgs()
+}
+
+func newFavoriteServiceTotalFavoritedByAuthorIDResult() interface{} {
+	return favorite.NewFavoriteServiceTotalFavoritedByAuthorIDResult()
+}
+
 func isFavoriteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	realArg := arg.(*favorite.FavoriteServiceIsFavoriteArgs)
 	realResult := result.(*favorite.FavoriteServiceIsFavoriteResult)
@@ -145,6 +183,26 @@ func (p *kClient) FavoriteCount(ctx context.Context, req *favorite.FavoriteCount
 	_args.Req = req
 	var _result favorite.FavoriteServiceFavoriteCountResult
 	if err = p.c.Call(ctx, "FavoriteCount", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) FavoriteCountByUserID(ctx context.Context, req *favorite.FavoriteCountByUserIDRequest) (r *favorite.FavoriteCountByUserIDResponse, err error) {
+	var _args favorite.FavoriteServiceFavoriteCountByUserIDArgs
+	_args.Req = req
+	var _result favorite.FavoriteServiceFavoriteCountByUserIDResult
+	if err = p.c.Call(ctx, "FavoriteCountByUserID", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) TotalFavoritedByAuthorID(ctx context.Context, req *favorite.TotalFavoritedByAuthorIDRequest) (r *favorite.TotalFavoritedByAuthorIDResponse, err error) {
+	var _args favorite.FavoriteServiceTotalFavoritedByAuthorIDArgs
+	_args.Req = req
+	var _result favorite.FavoriteServiceTotalFavoritedByAuthorIDResult
+	if err = p.c.Call(ctx, "TotalFavoritedByAuthorID", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

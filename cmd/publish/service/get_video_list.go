@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"github.com/Yra-A/Douyin_Simple_Demo/cmd/publish/dal/db"
 	"github.com/Yra-A/Douyin_Simple_Demo/cmd/publish/rpc"
 	"github.com/Yra-A/Douyin_Simple_Demo/kitex_gen/favorite"
@@ -28,7 +29,7 @@ func (s *GetVideoListService) GetVideoList(req *publish.GetVideoListRequest) ([]
 		klog.CtxInfof(s.ctx, "获取该视频列表失败: "+err.Error())
 		return nil, err
 	}
-
+	fmt.Println(req.VideoIds, videos, "!!!!!!!!!!!!!!!!!!!")
 	var vs []*publish.Video
 	for _, v := range videos {
 		favoriteCount, commentCount, isFavorite := s.getOtherVideoInfo(v.ID, req.UserId)
@@ -88,7 +89,6 @@ func (s *GetVideoListService) getAuthorByUserId(UserId int64) *publish.User {
 	})
 	if err != nil {
 		klog.CtxInfof(s.ctx, "获取视频的 Author 出现错误："+err.Error())
-
 	}
 	return &publish.User{
 		Id:              u.Id,

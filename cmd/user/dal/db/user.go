@@ -108,30 +108,3 @@ func GetWorkCountByUserId(user_id int64) (int64, error) {
 	}
 	return count, nil
 }
-
-// GetFavoriteCountByUserId 获取被用户点赞的视频数
-func GetFavoriteCountByUserId(user_id int64) (int64, error) {
-	var count int64
-	if err := DB.Model(&Favorite{}).Where("user_id = ?", user_id).Count(&count).Error; err != nil {
-		return 0, err
-	}
-	return count, nil
-}
-
-// QueryTotalFavoritedByAuthorID 获取该作者的获赞数
-func QueryTotalFavoritedByAuthorID(user_id int64) (int64, error) {
-	var count int64
-	videos := make([]*Video, 0)
-	if err := DB.Select("id").Where("author_id = ?", user_id).Find(&videos).Error; err != nil {
-		return 0, err
-	}
-
-	for _, v := range videos {
-		var cnt int64
-		if err := DB.Model(&Favorite{}).Where("video_id = ?", v.ID).Count(&cnt).Error; err != nil {
-			return 0, err
-		}
-		count += cnt
-	}
-	return count, nil
-}

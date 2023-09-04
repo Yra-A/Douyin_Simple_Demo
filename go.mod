@@ -6,16 +6,14 @@ require (
 	github.com/apache/thrift v0.18.1
 	github.com/cloudwego/hertz v0.6.7
 	github.com/cloudwego/kitex v0.7.0
-	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/hertz-contrib/jwt v1.0.2
 	github.com/hertz-contrib/logger/accesslog v0.0.0-20230619034227-00fc458d8f95
 	github.com/hertz-contrib/logger/logrus v1.0.0
 	github.com/hertz-contrib/obs-opentelemetry/tracing v0.2.2
-	github.com/hertz-contrib/reverseproxy v1.0.2
 	github.com/kitex-contrib/obs-opentelemetry v0.2.3
 	github.com/kitex-contrib/obs-opentelemetry/logging/logrus v0.0.0-20230530060140-c76e27f58391
 	github.com/kitex-contrib/registry-etcd v0.1.1
-	github.com/minio/minio-go/v7 v7.0.62
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/gorm v1.25.3
@@ -23,7 +21,13 @@ require (
 )
 
 require (
-	github.com/aliyun/aliyun-oss-go-sdk v2.2.8+incompatible // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
+	github.com/onsi/ginkgo v1.16.5 // indirect
+	github.com/onsi/gomega v1.27.10 // indirect
+)
+
+require (
+	github.com/aliyun/aliyun-oss-go-sdk v2.2.8+incompatible
 	github.com/andeya/goutil v1.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.38.20 // indirect
 	github.com/bytedance/go-tagexpr/v2 v2.9.6 // indirect
@@ -52,7 +56,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/pprof v0.0.0-20230509042627-b1315fad0c5a // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/henrylee2cn/ameda v1.5.1 // indirect
 	github.com/iancoleman/strcase v0.2.0 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
@@ -60,11 +63,7 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/kitex-contrib/tracer-opentracing v0.0.3
-	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
-	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/sha256-simd v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/gls v0.0.0-20220109145502-612d0167dce5 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -72,8 +71,6 @@ require (
 	github.com/oleiade/lane v1.0.1 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/rs/xid v1.5.0 // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/stretchr/testify v1.8.3 // indirect
 	github.com/tidwall/gjson v1.14.4 // indirect
@@ -82,7 +79,7 @@ require (
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
-	github.com/u2takey/ffmpeg-go v0.5.0 // indirect
+	github.com/u2takey/ffmpeg-go v0.5.0
 	github.com/u2takey/go-utils v0.3.1 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.5 // indirect
@@ -96,7 +93,6 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.17.0 // indirect
 	golang.org/x/arch v0.2.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/net v0.14.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.11.0 // indirect
@@ -107,7 +103,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230526203410-71b5a4ffd15e // indirect
 	google.golang.org/grpc v1.55.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
-	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/plugin/opentelemetry v0.1.3
 )

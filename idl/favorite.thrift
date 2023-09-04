@@ -68,13 +68,37 @@ struct FavoriteCountResponse {
     3: i64 favorite_count
 }
 
+struct FavoriteCountByUserIDRequest {
+    1: i64 user_id  (api.query="user_id")
+}
+
+struct FavoriteCountByUserIDResponse {
+    1: i32 status_code,        // 状态码，0-成功，其他值-失败
+    2: optional string status_msg, // 返回状态描述
+    3: i64 favorite_count
+}
+
+struct TotalFavoritedByAuthorIDRequest {
+    1: i64 author_id  (api.query="author_id")
+}
+
+struct TotalFavoritedByAuthorIDResponse {
+    1: i32 status_code,        // 状态码，0-成功，其他值-失败
+    2: optional string status_msg, // 返回状态描述
+    3: i64 total_favorited
+}
+
 service FavoriteService {
     // 点赞操作
     FavoriteActionResponse FavoriteAction(1:required FavoriteActionRequest req) (api.post="/douyin/favorite/action/")
     // 获取喜欢列表
     FavoriteListResponse FavoriteList(1:required FavoriteListRequest req) (api.get="/douyin/favorite/list/")
-    // 获取喜欢计数
-    FavoriteCountResponse FavoriteCount(1:FavoriteCountRequest req)
+    // 获取视频获赞数量
+    FavoriteCountResponse FavoriteCount(1:required FavoriteCountRequest req)
+    // 获取用户点赞过的视频数量
+    FavoriteCountByUserIDResponse FavoriteCountByUserID(1:FavoriteCountByUserIDRequest req)// 获取喜欢计数
+    // 获取作者的获赞数
+    TotalFavoritedByAuthorIDResponse TotalFavoritedByAuthorID(1:TotalFavoritedByAuthorIDRequest req)
     // 是否喜欢
     IsFavoriteResponse IsFavorite(1:IsFavoriteRequest req)
 }
