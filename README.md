@@ -1,5 +1,5 @@
 # Douyin-Simple-Demo
-Douyin-Simple-Demo 是一个仿照抖音实现的简易版 APP。
+Douyin-Simple-Demo 是一个仿照抖音实现的简易版 APP，实现了视频流模块、用户模块、投稿模块和点赞模块。
 
 ## 项目介绍
 1. 基于微服务架构，API 层使用 HTTP 框架 [Hertz](https://github.com/cloudwego/kitex)，微服务模块之间使用 RPC 框架 [Kitex](https://github.com/cloudwego/kitex) 通信
