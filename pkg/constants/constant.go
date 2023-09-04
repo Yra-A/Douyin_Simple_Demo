@@ -31,14 +31,12 @@ const (
 	VideosTableName   = "videos"
 	FavoriteTableName = "favorite"
 
-
-	SecretKey   = "secret key"
-	IdentityKey = "user id"
+	SecretKey           = "secret key"
+	IdentityKey         = "user id"
 	FavoriteServiceName = "favorite"
-	UserServiceName    = "user"
-	PublishServiceName = "publish"
-	FeedServiceName    = "feed"
-
+	UserServiceName     = "user"
+	PublishServiceName  = "publish"
+	FeedServiceName     = "feed"
 
 	CPURateLimit float64 = 80.0
 
@@ -51,4 +49,8 @@ var (
 	MySQLDefaultDSN = "gorm:gorm@tcp(localhost:18000)/test_douyin?charset=utf8&parseTime=True&loc=Local"
 	// EtcdAddress = "host.docker.internal:2379"
 	EtcdAddress = "localhost:2379"
+
+	RedisAddress  = "localhost:18003"
+	RedisPassword = ""
+	DBIndex       = 0 // 使用默认的数据库
 )

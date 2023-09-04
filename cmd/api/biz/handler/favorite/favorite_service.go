@@ -4,14 +4,14 @@ package favorite
 
 import (
 	"context"
-	"github.com/Yra-A/Douyin_Simple_Demo/cmd/api/biz/handler"
-	"github.com/Yra-A/Douyin_Simple_Demo/pkg/errno"
 
 	"log"
 
+	"github.com/Yra-A/Douyin_Simple_Demo/cmd/api/biz/handler"
 	hfavorite "github.com/Yra-A/Douyin_Simple_Demo/cmd/api/biz/model/favorite"
 	"github.com/Yra-A/Douyin_Simple_Demo/cmd/api/rpc"
 	kfavorite "github.com/Yra-A/Douyin_Simple_Demo/kitex_gen/favorite"
+	"github.com/Yra-A/Douyin_Simple_Demo/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )

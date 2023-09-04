@@ -18,6 +18,8 @@ package service
 
 import (
 	"context"
+	"github.com/Yra-A/Douyin_Simple_Demo/cmd/user/rpc"
+	"github.com/Yra-A/Douyin_Simple_Demo/kitex_gen/favorite"
 	"sync"
 
 	"github.com/Yra-A/Douyin_Simple_Demo/cmd/user/dal/db"
@@ -63,59 +65,22 @@ func (s *QueryUserService) QueryUser(user_id int64) (*user.User, error) {
 		wg.Done()
 	}()
 
-	//
-	//go func() {
-	//	FollowCount, err := db.GetFollowCount(user_id)
-	//	if err != nil {
-	//		errChan <- err
-	//		return
-	//	} else {
-	//		u.FollowCount = FollowCount
-	//	}
-	//	wg.Done()
-	//}()
-	//
-	//go func() {
-	//	FollowerCount, err := db.GetFollowerCount(user_id)
-	//	if err != nil {
-	//		errChan <- err
-	//	} else {
-	//		u.FollowerCount = FollowerCount
-	//	}
-	//	wg.Done()
-	//}()
-	//
-	//go func() {
-	//	if user_id != 0 {
-	//		IsFollow, err := db.QueryFollowExist(user_id, user_id)
-	//		if err != nil {
-	//			errChan <- err
-	//		} else {
-	//			u.IsFollow = IsFollow
-	//		}
-	//	} else {
-	//		u.IsFollow = false
-	//	}
-	//	wg.Done()
-	//}()
-
 	go func() {
-		FavoriteCount, err := db.GetFavoriteCountByUserId(user_id)
+		FavoriteCount, err := rpc.FavoriteCountByUserId(s.ctx, &favorite.FavoriteCountByUserIDRequest{UserId: user_id})
 		if err != nil {
 			errChan <- err
 		} else {
-			u.FavoriteCount = FavoriteCount
+			u.FavoriteCount = FavoriteCount.FavoriteCount
 		}
 		wg.Done()
 	}()
 
 	go func() {
-		TotalFavorited, err := db.QueryTotalFavoritedByAuthorID(user_id)
+		TotalFavorited, err := rpc.TotalFavoritedByAuthorId(s.ctx, &favorite.TotalFavoritedByAuthorIDRequest{AuthorId: user_id})
 		if err != nil {
 			errChan <- err
 		} else {
-			u.TotalFavorited = TotalFavorited
-
+			u.TotalFavorited = TotalFavorited.TotalFavorited
 		}
 		wg.Done()
 	}()
